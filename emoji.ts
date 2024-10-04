@@ -1,9 +1,5 @@
 const SOURCE_URL = "https://unicode.org/Public/emoji/16.0/emoji-test.txt";
 
-export default function isNonNullable<T>(value: T): value is NonNullable<T> {
-  return value != null;
-}
-
 const res = await fetch(SOURCE_URL);
 const text = await res.text();
 
@@ -18,7 +14,7 @@ for (const line of text.split("\n")) {
   if (line.startsWith(GROUP_PRE)) group = line.slice(GROUP_PRE.length);
   if (line.startsWith(SUBGROUP_PRE)) subgroup = line.slice(SUBGROUP_PRE.length);
   if (line.startsWith("#")) continue;
-  if (line.trim() === "") continue;
+  if (line === "") continue;
   const columns = line.match(
     /^(.+?)\s+;\s[\w-]+\s+#\s(?<emoji>.+?)\sE(?<version>[\d.]+)\s(?<name>.+)$/
   );
