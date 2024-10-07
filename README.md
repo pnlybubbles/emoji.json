@@ -19,7 +19,7 @@ emoji-test.txt
 1F600                                                  ; fully-qualified     # 😀 E1.0 grinning face
 ```
 
-to be json:
+emoji.json
 
 ```json
 [
@@ -34,8 +34,23 @@ to be json:
 ]
 ```
 
-- Only includes `fully-qualified` emoji
-  - Not includes "☺", "❤", "🦱" ...
+- Usable for emoji picker
+- Includes `fully-qualified` emoji
+  - Excluded "☺", "❤", "🦱" ...
 - The order is same as unicode specification
 - The name includes `:` will conventionally be a variation
   - "👋🏻" (`waving hand: light skin tone`) is variation of "👋" (`waving hand`)
+
+# Advanced
+
+`emoji.full.json` includes all specification.
+
+Additional properties:
+
+```json
+{
+  ...
+  "status": "fully-qualified",
+  "codes": "1F600"
+}
+```
