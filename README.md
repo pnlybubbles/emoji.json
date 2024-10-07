@@ -34,6 +34,8 @@ to be json:
 ]
 ```
 
+- Only includes `fully-qualified` emoji
+  - Not includes "☺", "❤", "🦱" ...
 - The order is same as unicode specification
 - The name includes `:` will conventionally be a variation
   - "👋🏻" (`waving hand: light skin tone`) is variation of "👋" (`waving hand`)
