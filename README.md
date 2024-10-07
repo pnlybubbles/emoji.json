@@ -2,7 +2,9 @@
 
 Simple JSON formatted emoji list from Unicode specification.
 
-Source: https://unicode.org/Public/emoji/16.0/emoji-test.txt
+Useful for emoji pickers.
+
+Single json, no dependencies.
 
 # Data
 
@@ -10,7 +12,7 @@ https://raw.githubusercontent.com/pnlybubbles/emoji.json/refs/tags/v16.0/emoji.j
 
 # Format
 
-emoji-test.txt
+emoji-test.txt (https://unicode.org/Public/emoji/16.0/emoji-test.txt)
 
 ```
 # group: Smileys & Emotion
@@ -66,7 +68,7 @@ emoji.json
 ]
 ```
 
-- Useful for emoji pickers
+-
 - Includes only `fully-qualified` emoji
   - Excluded unqualified emoji "☺" `U+263A` ("☺️" `U+263A U+FE0F` is included)
   - Excluded emoji component "🦱"
