@@ -4,6 +4,10 @@ Simple JSON formatted emoji list from Unicode specification.
 
 Source: https://unicode.org/Public/emoji/16.0/emoji-test.txt
 
+# Data
+
+https://raw.githubusercontent.com/pnlybubbles/emoji.json/refs/tags/v16.0/emoji.json
+
 # Format
 
 emoji-test.txt
@@ -30,6 +34,6 @@ to be json:
 ]
 ```
 
-- The Order is same as unicode specification
+- The order is same as unicode specification
 - The name includes `:` will conventionally be a variation
   - "👋🏻" (`waving hand: light skin tone`) is variation of "👋" (`waving hand`)
