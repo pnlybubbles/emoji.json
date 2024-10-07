@@ -15,10 +15,10 @@ type Emoji = {
   emoji: string
   version: string
   name: string
-  variations?: { codes: string, name: string }[]
+  variants?: { emoji: string, name: string }[]
 }
 
-type EmojiFull = Omit<Emoji, 'variations'> & {
+type EmojiFull = Omit<Emoji, 'variants'> & {
   codes: string
   status: Status
 }
@@ -43,17 +43,23 @@ for (const line of text.split('\n')) {
 
   emojiFull.push({ group, subgroup, ...captured })
 
-  const nameComponents = captured.name.match(/^(?<name>.+?)(:\s(?<variation>.+))?$/)?.groups as { name: string, variation?: string } | undefined
+  const nameComponents = captured.name.match(/^(?<prefix>.+?)(:\s(?<variation>.+))?$/)?.groups as { prefix: string, variation?: string } | undefined
   if (!nameComponents) continue
 
-  const { status, codes, ...rest } = captured
+  const variants = nameComponents.variation?.split(', ') ?? []
+  const skinTonevariants = variants.filter(v => v.endsWith('skin tone'))
+  const nonSkinTonevariants = variants.filter(v => !v.endsWith('skin tone') && v !== 'person')
+  const name = nameComponents.prefix + (nonSkinTonevariants.length > 0 ? `: ${nonSkinTonevariants.join(', ')}` : '')
+
+  const { status, codes: _, ...rest } = captured
 
   if (status !== 'fully-qualified') continue
 
   const last = emoji[emoji.length - 1]
-  if (last && last.name === nameComponents.name && nameComponents.variation) {
-    last.variations ??= []
-    last.variations.push({ codes, name: nameComponents.variation })
+
+  if (last && last.name === name && skinTonevariants.length > 0) {
+    last.variants ??= []
+    last.variants.push({ emoji: captured.emoji, name: skinTonevariants.join(', ') })
   } else {
     emoji.push({ group, subgroup, ...rest })
   }

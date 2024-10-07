@@ -17,6 +17,20 @@ emoji-test.txt
 
 # subgroup: face-smiling
 1F600                                                  ; fully-qualified     # 😀 E1.0 grinning face
+
+...
+
+# group: People & Body
+
+# subgroup: hand-fingers-open
+1F44B                                                  ; fully-qualified     # 👋 E0.6 waving hand
+1F44B 1F3FB                                            ; fully-qualified     # 👋🏻 E1.0 waving hand: light skin tone
+1F44B 1F3FC                                            ; fully-qualified     # 👋🏼 E1.0 waving hand: medium-light skin tone
+1F44B 1F3FD                                            ; fully-qualified     # 👋🏽 E1.0 waving hand: medium skin tone
+1F44B 1F3FE                                            ; fully-qualified     # 👋🏾 E1.0 waving hand: medium-dark skin tone
+1F44B 1F3FF                                            ; fully-qualified     # 👋🏿 E1.0 waving hand: dark skin tone
+
+...
 ```
 
 emoji.json
@@ -30,20 +44,43 @@ emoji.json
     "version": "1.0",
     "name": "grinning face"
   },
+
+  ...
+
+  {
+    "group": "People & Body",
+    "subgroup": "hand-fingers-open",
+    "emoji": "👋",
+    "version": "0.6",
+    "name": "waving hand",
+    "variants": [
+      { "emoji": "👋🏻", "name": "light skin tone" },
+      { "emoji": "👋🏼", "name": "medium-light skin tone" },
+      { "emoji": "👋🏽", "name": "medium skin tone" },
+      { "emoji": "👋🏾", "name": "medium-dark skin tone" },
+      { "emoji": "👋🏿", "name": "dark skin tone" }
+    ]
+  },
+
   ...
 ]
 ```
 
-- Usable for emoji picker
-- Includes `fully-qualified` emoji
-  - Excluded "☺", "❤", "🦱" ...
-- The order is same as unicode specification
-- The name includes `:` will conventionally be a variation
-  - "👋🏻" (`waving hand: light skin tone`) is variation of "👋" (`waving hand`)
+- Useful for emoji pickers
+- Includes only `fully-qualified` emoji
+  - Excluded unqualified emoji "☺" `U+263A` ("☺️" `U+263A U+FE0F` is included)
+  - Excluded emoji component "🦱"
+- The order is same as the specification
+- Skin tone variants are grouped into the original emoji without modifiers
+  - "👋🏻" (`waving hand: light skin tone`) is a variant of "👋" (`waving hand`)
 
 # Advanced
 
 `emoji.full.json` includes all specification.
+
+- No variants, all flatten.
+- Includes status: `fully-qualified`, `unqualified`, `minimally-qualified`, `component`
+- Includes raw Unicode sequance.
 
 Additional properties:
 
