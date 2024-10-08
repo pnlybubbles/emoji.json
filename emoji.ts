@@ -66,4 +66,5 @@ for (const line of text.split('\n')) {
 }
 
 await Deno.writeTextFile('emoji.json', JSON.stringify(emoji))
+await Deno.writeTextFile('emoji.pretty.json', JSON.stringify(emoji, null, '  '))
 await Deno.writeTextFile('emoji.full.json', JSON.stringify(emojiFull))

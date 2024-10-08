@@ -3,7 +3,7 @@
     "semiColons": false,
     "singleQuote": true
   },
-  "exclude": ["emoji.json"],
+  "exclude": ["emoji.json", "emoji.pretty.json", "emoji.full.json"],
   "tasks": {
     "generate": "deno run --allow-read --allow-write --allow-net emoji.ts"
   }
