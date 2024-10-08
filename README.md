@@ -81,7 +81,8 @@ emoji.json
 `emoji.full.json` includes all specification.
 
 - No variants, all flatten.
-- Includes status: `fully-qualified`, `unqualified`, `minimally-qualified`, `component`
+- Includes status: `fully-qualified`, `unqualified`, `minimally-qualified`,
+  `component`
 - Includes raw Unicode sequance.
 
 Additional properties:

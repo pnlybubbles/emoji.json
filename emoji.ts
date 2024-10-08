@@ -6,8 +6,19 @@ const text = await res.text()
 const GROUP_PRE = '# group: '
 const SUBGROUP_PRE = '# subgroup: '
 
-type Status = 'component' | 'fully-qualified' | 'minimally-qualified' | 'unqualified'
-type Groups = { codes: string, status: Status, emoji: string, version: string, name: string }
+type Status =
+  | 'component'
+  | 'fully-qualified'
+  | 'minimally-qualified'
+  | 'unqualified'
+
+type Groups = {
+  codes: string
+  status: Status
+  emoji: string
+  version: string
+  name: string
+}
 
 type Emoji = {
   group: string
@@ -15,7 +26,7 @@ type Emoji = {
   emoji: string
   version: string
   name: string
-  variants?: { emoji: string, name: string }[]
+  variants?: { emoji: string; name: string }[]
 }
 
 type EmojiFull = Omit<Emoji, 'variants'> & {
@@ -43,13 +54,20 @@ for (const line of text.split('\n')) {
 
   emojiFull.push({ group, subgroup, ...captured })
 
-  const nameComponents = captured.name.match(/^(?<prefix>.+?)(:\s(?<variation>.+))?$/)?.groups as { prefix: string, variation?: string } | undefined
+  const nameComponents = captured.name.match(
+    /^(?<prefix>.+?)(:\s(?<variation>.+))?$/,
+  )?.groups as { prefix: string; variation?: string } | undefined
   if (!nameComponents) continue
 
   const variants = nameComponents.variation?.split(', ') ?? []
-  const skinTonevariants = variants.filter(v => v.endsWith('skin tone'))
-  const nonSkinTonevariants = variants.filter(v => !v.endsWith('skin tone') && v !== 'person')
-  const name = nameComponents.prefix + (nonSkinTonevariants.length > 0 ? `: ${nonSkinTonevariants.join(', ')}` : '')
+  const skinTonevariants = variants.filter((v) => v.endsWith('skin tone'))
+  const nonSkinTonevariants = variants.filter((v) =>
+    !v.endsWith('skin tone') && v !== 'person'
+  )
+  const name = nameComponents.prefix +
+    (nonSkinTonevariants.length > 0
+      ? `: ${nonSkinTonevariants.join(', ')}`
+      : '')
 
   const { status, codes: _, ...rest } = captured
 
@@ -59,7 +77,10 @@ for (const line of text.split('\n')) {
 
   if (last && last.name === name && skinTonevariants.length > 0) {
     last.variants ??= []
-    last.variants.push({ emoji: captured.emoji, name: skinTonevariants.join(', ') })
+    last.variants.push({
+      emoji: captured.emoji,
+      name: skinTonevariants.join(', '),
+    })
   } else {
     emoji.push({ group, subgroup, ...rest })
   }
